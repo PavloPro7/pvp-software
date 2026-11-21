@@ -1,0 +1,53 @@
+---
+title: "Selfcare Scan"
+summary: "A skincare app that scans a product's barcode and tells you whether its ingredients suit your skin, with AI skin tracking and a personal routine."
+platforms:
+  - name: "Google Play"
+    href: "https://play.google.com/store/apps/details?id=app.selfcareai"
+  - name: "App Store"
+stack: ["Flutter", "Dart", "Supabase", "TypeScript", "Gemini", "RevenueCat"]
+links:
+  - label: "App page"
+    href: "https://pavlopro7.github.io/selfcareai-privacy/app.html"
+icon: "/projects/selfcare-scan/icon.png"
+cover: "/projects/selfcare-scan/cover-wide.png"
+featured: true
+order: 2
+---
+
+Selfcare Scan is a mobile app for Android and iOS. It answers one question in a few seconds: does this cosmetic product suit my skin? It also tracks how your skin changes over time and keeps your daily routine in one place.
+
+## What it does
+
+- **Instant product check.** Scan a barcode and get a verdict for your skin profile: good fit, worth a check, or not for you. The check flags things like fragrance, drying alcohol, pore-clogging oils for acne-prone skin, and the allergies you saved.
+- **New products by photo.** If a product is not in the database yet, photograph its ingredient list. The AI reads it, gives a verdict and adds the product to a shared database, so the next person gets an instant check.
+- **Deep analysis.** A score and an explanation of each ingredient, in your language.
+- **Skin tracking.** AI face scans and a dashboard show how your skin changes over time.
+- **Routine and coach.** A morning and evening routine built from your skin profile, and an AI coach for questions about routines, ingredients and sun protection.
+- **15 languages**, including right-to-left layout for Arabic.
+
+## How it is built
+
+- **App:** Flutter and Dart, one codebase for both platforms. Each feature owns its own slice of state, and screens reach the backend only through service interfaces.
+- **Backend:** Supabase. Postgres with row-level security, sign-in by email, Google and Apple, and seven Edge Functions written in TypeScript.
+- **AI:** Google Gemini, called only from the server, so no AI key ships inside the app.
+- **Payments:** subscriptions through RevenueCat and optional rewarded ads through AdMob. AI usage is counted on the server.
+- **Releases:** Codemagic builds both platforms, and Fastlane keeps the store listing texts in version control.
+
+## Decisions worth noting
+
+### Safety rules are code, not AI
+
+The instant product check uses fixed rules, so the same product and the same skin profile always get the same answer. Routine and coach guidance is backed by a built-in knowledge library with sources from NICE, AAD, EMA, FDA and the European Commission. Its safety rules are fixed code too: they can hold back automated advice and point the user to a professional instead.
+
+### Every screen is tested in every language
+
+A layout test renders every main screen in all 15 languages on a small 320 px phone with enlarged text, so a long translation cannot break the layout unnoticed. Together with the unit and flow tests, the app has close to 200 automated tests, and the server functions have their own.
+
+### The database grows with its users
+
+Ingredient data starts from Open Beauty Facts. Every product a user photographs is added to the shared catalog, so the free instant check covers more products over time.
+
+---
+
+Selfcare Scan gives cosmetic and wellness information. It is not a medical device and does not diagnose or treat any condition.

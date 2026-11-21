@@ -1,0 +1,54 @@
+---
+title: "AI news agent for Telegram"
+summary: "A Telegram bot that collects news, writes channel posts with AI and publishes them under rules its owner sets. It runs the PVP Software channel."
+platforms:
+  - name: "Telegram"
+    href: "https://t.me/pvp_software"
+    action: "See the channel"
+stack: ["Python", "aiogram", "Gemini", "SQLite", "Pydantic", "Docker"]
+icon: "/projects/telegram-channel-bot/icon.jpg"
+cover: "/projects/telegram-channel-bot/cover.jpg"
+featured: true
+order: 3
+---
+
+This bot works as an editor for a Telegram channel. On a schedule it reads news sources, picks what fits the channel, writes each post with AI, and either sends a draft for approval or publishes it within set limits. It runs the PVP Software channel.
+
+## What it does
+
+- **Collects news** from Google News topics, RSS feeds and public Telegram channels, and drops duplicates.
+- **Writes drafts.** Gemini filters stories for relevance and writes each post in the channel's language and tone.
+- **Asks before posting.** Every draft arrives with Publish, Rewrite and Skip buttons. Auto-posting is optional, with quiet hours, a daily limit and a minimum gap between posts.
+- **Takes instructions in plain language.** Type or send a voice message, such as "add this source", and reply to a draft with "make it shorter" to edit it.
+- **Summarizes any link** pasted into the chat.
+- **Serves several channels**, each with its own sources and style.
+
+## How it is built
+
+- **Bot:** Python with aiogram, fully asynchronous.
+- **AI:** Google Gemini. One model plans actions, a lighter one writes summaries and a third transcribes voice. Requests are paced and retried, with fallback models.
+- **Storage:** SQLite for sources, drafts and settings, with a log of every settings change and an undo.
+- **Deployment:** a Docker container with a persistent volume.
+- **Tests:** 61 automated tests with pytest.
+
+## Decisions worth noting
+
+### The AI proposes, code decides
+
+The language model never changes anything itself. It proposes actions, and a separate, predictable layer validates them. Anything risky, such as publishing, removing a source or turning on auto-posting, needs a confirmation through a single-use button.
+
+### News text is treated as untrusted
+
+Article text is fenced off before it reaches the model, so instructions hidden inside an article are handled as content, not as commands. Source addresses are checked too, so the bot only fetches public websites.
+
+### Locked until claimed
+
+A fresh bot ignores everyone. Its owner claims it once, in a private chat, with a single-use token.
+
+### No AI, no auto-post
+
+If the AI is unavailable, the bot falls back to a plain extract and holds the draft for review instead of publishing it.
+
+### No risk to a personal account
+
+It reads public channels through their web previews, so it needs no phone number and no user account.

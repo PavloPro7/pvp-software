@@ -1,0 +1,87 @@
+@use "../styles/tokens" as *;
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @include md {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+// Cards share a row and grow to fill it, so a row never ends with a gap.
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  @include md {
+    flex: 1 1 16rem;
+  }
+
+  h3 {
+    font-size: 1.125rem;
+    margin: 0;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        color: var(--accent);
+      }
+    }
+  }
+}
+
+// A featured project takes the full row.
+.featured {
+  @include md {
+    flex-basis: 100%;
+  }
+
+  h3 {
+    font-size: 1.375rem;
+  }
+
+  .summary {
+    max-width: 40rem;
+  }
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.icon {
+  flex: none;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: #ffffff;
+}
+
+.stack {
+  margin: var(--space-3) 0 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: auto 0 0;
+  padding-top: var(--space-3);
+  font-weight: 600;
+}

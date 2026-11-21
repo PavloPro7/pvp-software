@@ -1,0 +1,60 @@
+---
+title: "RPG Tasks"
+summary: "A productivity app that turns tasks and focus time into XP for the skills you choose, with a focus timer, quests and a weekly league."
+platforms:
+  - name: "Google Play"
+    href: "https://play.google.com/store/apps/details?id=app.rpgtasks"
+  - name: "App Store"
+    href: "https://apps.apple.com/us/app/rpg-tasks-focus-timer-xp/id6783837126"
+stack: ["Flutter", "Dart", "Firebase", "Swift", "RevenueCat"]
+icon: "/projects/rpg-tasks/icon.png"
+screenshots:
+  - "/projects/rpg-tasks/screenshot-1.webp"
+  - "/projects/rpg-tasks/screenshot-2.webp"
+  - "/projects/rpg-tasks/screenshot-3.webp"
+featured: true
+order: 1
+---
+
+RPG Tasks is a gamified productivity app for Android and iOS. It combines a to-do list, a focus timer and skill tracking: every finished task and every focused minute earns XP for a skill you chose, such as Coding, Fitness or English.
+
+## What it does
+
+- **Quests.** Tasks are quests with a difficulty, notes, subtasks and repeats. Completing one earns XP.
+- **Flow timer.** A focus timer that counts up from zero. Pick a project, work, and stop when you are done. The session is recorded and earns skill XP.
+- **Credit where it belongs.** One project can feed several skills, and each session can go to a different one: coding today, marketing tomorrow, same project.
+- **Skills and levels.** Each skill has its own XP, level and history, and a Hero level sums them all up.
+- **Activity calendar.** Filter by skill to see on which days you really worked on it.
+- **Reminders you can act on.** Complete a quest, snooze it for an hour or move it to tomorrow straight from the notification.
+- **Weekly league.** An optional board of up to 30 players, ranked by focus time.
+- **15 languages.**
+
+## How it is built
+
+- **App:** Flutter and Dart, one codebase for both platforms, about 58,000 lines of Dart.
+- **Backend:** Firebase Authentication and Cloud Firestore. Sign-in by email, Google or Apple, or as a guest.
+- **Native iOS:** a Live Activity written in Swift shows the running timer on the Lock Screen and in the Dynamic Island.
+- **Payments and ads:** subscriptions through RevenueCat and ads through AdMob.
+- **Releases:** store texts for every language live in the repository and are uploaded with Fastlane.
+
+## Decisions worth noting
+
+### Security rules are the whole backend
+
+There is no server code. Firestore security rules do all the validation, so they are treated like code: a suite of emulator tests runs before every publish.
+
+### Progress is safe across devices
+
+XP is saved as "add this much", not "the total is now this", so a phone holding old data cannot overwrite progress made on another device.
+
+### Notification buttons work with the app closed
+
+Reminder buttons run in the background, even when the app is not open. XP for a quest completed this way waits in a queue and is added exactly once, the next time the app opens.
+
+### A fair league
+
+Only sessions measured by the timer and left unedited count toward the weekly board.
+
+### Tested in every language
+
+Screens are layout-tested in all 15 languages, as part of about 500 automated tests.

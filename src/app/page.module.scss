@@ -1,0 +1,179 @@
+@use "../styles/tokens" as *;
+
+// Hero: the channel's slogan on the left, a board of what is live on the right.
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+
+  // The grid and violet glow from the channel banner, behind the hero only.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(34rem 22rem at 82% 40%, rgb(160 132 251 / 0.22), transparent 70%),
+      linear-gradient(var(--border) 1px, transparent 1px) 0 0 / 4.5rem 4.5rem,
+      linear-gradient(90deg, var(--border) 1px, transparent 1px) 0 0 / 4.5rem 4.5rem;
+    mask-image: linear-gradient(100deg, transparent 25%, #000 80%);
+  }
+}
+
+.heroInner {
+  display: grid;
+  align-items: center;
+  gap: var(--space-5);
+  padding-block: var(--space-5);
+
+  @include md {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: var(--space-6);
+    padding-block: var(--space-6);
+  }
+}
+
+.slogan {
+  margin: 0 0 var(--space-4);
+  font-size: clamp(3.25rem, 9vw, 5.75rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+
+  span {
+    display: block;
+  }
+}
+
+.lead {
+  max-width: 30rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.1875rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+// The "@pvp_software" pill from the banner, as a link to the channel.
+.handle {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  color: var(--accent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  @include focus-ring;
+
+  &:hover {
+    border-color: var(--accent);
+  }
+}
+
+// The board: the banner's app window, filled with real data.
+.board {
+  background: rgb(23 26 33 / 0.9);
+  border: 1px solid var(--border-strong);
+  border-radius: 0.875rem;
+  box-shadow: 0 1.5rem 3rem -1.5rem rgb(0 0 0 / 0.7);
+  overflow: hidden;
+}
+
+.boardBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.75rem var(--space-3);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.lights {
+  display: inline-flex;
+  gap: 0.375rem;
+
+  i {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    background: var(--border-strong);
+  }
+}
+
+.boardTitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+
+.liveTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-left: auto;
+  color: var(--action);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.liveDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--action);
+}
+
+.boardList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    display: grid;
+    gap: 0.625rem;
+    padding: var(--space-3);
+    border-top: 1px solid var(--border);
+
+    &:first-child {
+      border-top: 0;
+    }
+  }
+}
+
+.boardName {
+  color: var(--text);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a.boardName:hover {
+  color: var(--accent);
+}
+
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+
+  h2 {
+    margin: 0;
+  }
+}

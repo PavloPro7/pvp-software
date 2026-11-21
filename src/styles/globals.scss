@@ -1,0 +1,150 @@
+@use "tokens" as *;
+
+:root {
+  // PVP Software palette, taken from the channel's artwork.
+  color-scheme: dark;
+  --bg: #111217; // ink
+  --surface: #171a21; // panels and cards
+  --text: #f4f4f6;
+  --muted: #a3a6b3;
+  --border: #262932;
+  --border-strong: #3a3e4a;
+  --accent: #a084fb; // brand violet: wordmark, links, focus
+  --action: #48daa9; // green: "live" and the main button, nothing else
+  --action-hover: #6fe6bd;
+  --action-contrast: #0c1512;
+  --danger: #ff9a9a;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --radius: 0.75rem;
+}
+
+::selection {
+  background: rgb(160 132 251 / 0.35);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+body {
+  // Column layout so the footer stays at the bottom on short pages.
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-3);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+p {
+  margin: 0 0 var(--space-3);
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+  @include focus-ring;
+}
+
+code,
+pre {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.9em;
+}
+
+main {
+  flex: 1;
+}
+
+.container {
+  width: 100%;
+  max-width: $page-width;
+  margin-inline: auto;
+  padding-inline: var(--space-3);
+
+  @include md {
+    padding-inline: var(--space-4);
+  }
+}
+
+.narrow {
+  max-width: $content-width;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+// For text that only screen readers should get.
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.section {
+  padding-block: var(--space-5);
+
+  @include md {
+    padding-block: var(--space-6);
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+
+  &:focus {
+    left: var(--space-3);
+    top: var(--space-3);
+    background: var(--surface);
+    padding: var(--space-2) var(--space-3);
+    z-index: 10;
+  }
+}

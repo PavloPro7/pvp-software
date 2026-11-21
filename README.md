@@ -1,0 +1,54 @@
+# Personal site
+
+Next.js (App Router) + TypeScript + Sass modules. Blog posts are MDX files.
+
+## Run
+
+```bash
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build
+npm run lint
+```
+
+## Where things live
+
+| What | Where |
+|---|---|
+| Brand name, slogan, links, email, navigation | `src/data/site.ts` |
+| Projects | `content/projects/*.mdx` (text below the top block becomes the project's own page) |
+| Project images | `public/projects/<project>/` (`icon` square, `cover` 16:9, `screenshots` 9:16) |
+| Blog posts | `content/blog/*.mdx` |
+| Colours, spacing, breakpoints | `src/styles/globals.scss`, `src/styles/_tokens.scss` |
+| Contact form (server action) | `src/app/contact/actions.ts` |
+
+## Project files
+
+Each file in `content/projects` starts with a block like this:
+
+```yaml
+title: "My app"
+summary: "One sentence about it."
+platforms:
+  - name: "Google Play"   # with href: live there, shown with a green dot
+    href: "https://play.google.com/store/apps/details?id=..."
+  - name: "App Store"     # without href: shown as "soon"
+stack: ["Flutter", "Dart"]
+icon: "/projects/my-app/icon.png"
+featured: true            # full-width card
+order: 1                  # position in the list
+```
+
+When an app goes live somewhere, add its `href` and the badge turns green.
+
+## Design
+
+The look follows the PVP Software channel artwork. Colours live at the top of
+`src/styles/globals.scss`: violet is the brand colour, green is used only for
+"live" and the main button.
+
+## Still to do
+
+- Replace the placeholders marked `TODO` in `src/data`.
+- Connect the contact form to an email service; for now messages only reach the server log.
+- Write the About page.

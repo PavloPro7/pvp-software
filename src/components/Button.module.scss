@@ -1,0 +1,43 @@
+@use "../styles/tokens" as *;
+
+// The main button is green, like the call-to-action on the channel banner.
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--action);
+  border-radius: var(--radius);
+  background: var(--action);
+  color: var(--action-contrast);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+  @include focus-ring;
+
+  &:hover {
+    background: var(--action-hover);
+    border-color: var(--action-hover);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+}
+
+.secondary {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border-strong);
+
+  &:hover {
+    background: transparent;
+    border-color: var(--accent);
+  }
+}

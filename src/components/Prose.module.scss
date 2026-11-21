@@ -1,0 +1,53 @@
+// Styles for long-form text written in MDX (blog posts, project pages).
+.prose {
+  h2 {
+    margin-top: var(--space-5);
+  }
+
+  h3 {
+    font-size: 1.125rem;
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+  }
+
+  ul,
+  ol {
+    padding-left: 1.25rem;
+    margin: 0 0 var(--space-3);
+  }
+
+  li {
+    margin-bottom: var(--space-2);
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin-block: var(--space-5) var(--space-3);
+  }
+
+  hr + p {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  pre {
+    overflow-x: auto;
+    padding: var(--space-3);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  :not(pre) > code {
+    padding: 0.1em 0.35em;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.25rem;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}

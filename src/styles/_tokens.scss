@@ -1,0 +1,18 @@
+// Design tokens: change the look of the whole site from here.
+$breakpoint-md: 48rem;
+$content-width: 42rem;
+$page-width: 64rem;
+
+@mixin md {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
