@@ -1,0 +1,42 @@
+.text {
+  overflow-wrap: anywhere;
+
+  p,
+  blockquote {
+    // Telegram posts use plain line breaks; keep them.
+    white-space: pre-wrap;
+  }
+
+  p {
+    margin: 0 0 var(--space-3);
+  }
+
+  blockquote {
+    margin: 0 0 var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+
+  pre {
+    overflow-x: auto;
+    margin: 0 0 var(--space-3);
+    padding: var(--space-3);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  :not(pre) > code {
+    padding: 0.1em 0.35em;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.25rem;
+  }
+}
+
+.spoiler {
+  background: var(--surface);
+  border-radius: 0.25rem;
+}

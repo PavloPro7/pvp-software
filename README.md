@@ -18,7 +18,8 @@ npm run lint
 | Brand name, slogan, links, email, navigation | `src/data/site.ts` |
 | Projects | `content/projects/*.mdx` (text below the top block becomes the project's own page) |
 | Project images | `public/projects/<project>/` (`icon` square, `cover` 16:9, `screenshots` 9:16) |
-| Blog posts | `content/blog/*.mdx` |
+| Blog posts written by hand | `content/blog/*.mdx` |
+| Blog posts copied from Telegram | `content/telegram/*.json` (written by the bot, see below) |
 | Colours, spacing, breakpoints | `src/styles/globals.scss`, `src/styles/_tokens.scss` |
 | Contact form (server action) | `src/app/contact/actions.ts` |
 
@@ -40,6 +41,19 @@ order: 1                  # position in the list
 ```
 
 When an app goes live somewhere, add its `href` and the badge turns green.
+
+## Telegram posts
+
+The Telegram bot (tgParcer) copies the channel posts written by a person into
+this repository: one file per post in `content/telegram/<post id>.json`, and
+its photo, if any, in `public/telegram/`. They show up in the Blog next to the
+hand-written posts, at `/blog/tg-<post id>`. The bot's AI news posts are not
+copied.
+
+- To hide a post from the site, delete its file here (deleting it in Telegram
+  does not remove it).
+- To keep a channel post off the site, put `#nosite` in it.
+- On your computer, run `git pull` to see posts the bot has added.
 
 ## Design
 

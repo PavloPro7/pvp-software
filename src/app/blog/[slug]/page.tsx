@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { TelegramText } from "@/components/TelegramText";
 import { formatDate, getAllPosts, getPost } from "@/lib/posts";
 import prose from "@/components/Prose.module.scss";
+import styles from "./post.module.scss";
 
 // Every real page here is built ahead of time from a content file. Only an
 // unknown address reaches the server at request time, so it may wait for it.
@@ -38,9 +41,33 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
         </time>
         <h1>{post.title}</h1>
       </header>
-      <div className={prose.prose}>
-        <MDXRemote source={post.content} />
-      </div>
+
+      {post.source === "telegram" ? (
+        <>
+          {post.telegram.photo && (
+            <Image
+              src={post.telegram.photo.src}
+              alt=""
+              width={post.telegram.photo.width}
+              height={post.telegram.photo.height}
+              sizes="(min-width: 48rem) 42rem, 100vw"
+              className={styles.photo}
+            />
+          )}
+          <TelegramText text={post.telegram.text} entities={post.telegram.entities} />
+          {post.telegram.url && (
+            <p className={styles.origin}>
+              <a href={post.telegram.url} rel="noopener">
+                View this post on Telegram
+              </a>
+            </p>
+          )}
+        </>
+      ) : (
+        <div className={prose.prose}>
+          <MDXRemote source={post.content} />
+        </div>
+      )}
     </article>
   );
 }
