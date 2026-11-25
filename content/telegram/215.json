@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "id": 215,
+  "channel": "pvp_software",
+  "url": "https://t.me/pvp_software/215",
+  "date": "2026-11-25T17:51:56Z",
+  "edited": null,
+  "text": "One man = $2.6 trillion\n\nSeven weeks of falling wiped about $2.6 trillion off Nvidia. Same chips. Same engineers. Same orders. The only thing that changed was one name: Jensen Huang was out. CNBC\n\nThen the board voted him back in, and the stock jumped 31.5% in a single day. admiralmarkets\n\nEveryone is calling this a weakness. I think it's the opposite.\n\nGreat companies are not org charts. They are their founders. Apple was Jobs. Tesla is Musk. Nvidia is Huang. The market doesn't pay for GPUs; it pays for the person who decided ten years ago that GPUs would run the world.\n\nYes, it makes the company fragile. That's the price. A company that survives anyone leaving is usually a company nobody is excited about.\n\nAs a developer I take one thing from this: your name is part of your product. People don't follow code, they follow whoever stands behind it. That's why I build under my own.\n\nWhat do you think: strength or risk?",
+  "entities": [
+    {
+      "type": "bold",
+      "offset": 0,
+      "length": 23
+    },
+    {
+      "type": "text_link",
+      "offset": 191,
+      "length": 4,
+      "url": "https://www.cnbc.com/2026/11/20/nvidias-7-week-losing-streak-is-longest-since-2008-financial-crisis.html"
+    },
+    {
+      "type": "text_link",
+      "offset": 275,
+      "length": 14,
+      "url": "https://admiralmarkets.com/analytics/traders-blog/why-is-nvidia-stock-down-november-2026"
+    }
+  ],
+  "photo": {
+    "src": "/telegram/215.jpg",
+    "width": 2160,
+    "height": 2160
+  }
+}
