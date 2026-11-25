@@ -1,41 +1,30 @@
-@use "../../styles/tokens" as *;
-
-.form {
-  display: grid;
+.actions {
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--space-3);
-  margin-top: var(--space-4);
-
-  label {
-    display: grid;
-    gap: var(--space-1);
-    font-weight: 600;
-    font-size: 0.9375rem;
-  }
-
-  input,
-  textarea {
-    width: 100%;
-    padding: var(--space-2) var(--space-3);
-    background: var(--surface);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    font: inherit;
-    font-weight: 400;
-    @include focus-ring;
-  }
-
-  button {
-    justify-self: start;
-  }
+  margin: var(--space-4) 0;
 }
 
-.honeypot {
-  position: absolute !important;
-  left: -9999px;
-}
-
-.error {
-  color: var(--danger);
+.routes {
   margin: 0;
+  border-top: 1px solid var(--border);
+
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-3);
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--border);
+  }
+
+  dt {
+    color: var(--muted);
+  }
+
+  dd {
+    margin: 0;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
 }

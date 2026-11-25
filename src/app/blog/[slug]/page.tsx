@@ -3,13 +3,14 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { TelegramText } from "@/components/TelegramText";
+import { asset } from "@/lib/paths";
 import { formatDate, getAllPosts, getPost } from "@/lib/posts";
 import prose from "@/components/Prose.module.scss";
 import styles from "./post.module.scss";
 
-// Every real page here is built ahead of time from a content file. Only an
-// unknown address reaches the server at request time, so it may wait for it.
-export const instant = false;
+// The site is exported as static files, so only the pages that exist at build
+// time are created; any other address gets the "Page not found" page.
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
@@ -46,7 +47,7 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
         <>
           {post.telegram.photo && (
             <Image
-              src={post.telegram.photo.src}
+              src={asset(post.telegram.photo.src)}
               alt=""
               width={post.telegram.photo.width}
               height={post.telegram.photo.height}

@@ -4,14 +4,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { PlatformList } from "@/components/PlatformList";
+import { site } from "@/data/site";
+import { asset } from "@/lib/paths";
 import { getAllProjects, getProject } from "@/lib/projects";
 import button from "@/components/Button.module.scss";
 import prose from "@/components/Prose.module.scss";
 import styles from "./project.module.scss";
 
-// Every real page here is built ahead of time from a content file. Only an
-// unknown address reaches the server at request time, so it may wait for it.
-export const instant = false;
+// The site is exported as static files, so only the pages that exist at build
+// time are created; any other address gets the "Page not found" page.
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   const projects = getAllProjects();
@@ -31,7 +33,7 @@ export async function generateMetadata({
       type: "article",
       title: project.title,
       description: project.summary,
-      images: project.cover ? [project.cover] : undefined,
+      images: project.cover ? [`${site.url}${project.cover}`] : undefined,
     },
   };
 }
@@ -59,7 +61,13 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
 
       <header className={styles.header}>
         {project.icon && (
-          <Image src={project.icon} alt="" width={64} height={64} className={styles.icon} />
+          <Image
+            src={asset(project.icon)}
+            alt=""
+            width={64}
+            height={64}
+            className={styles.icon}
+          />
         )}
         <div>
           <h1>{project.title}</h1>
@@ -105,7 +113,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
       {project.cover && (
         <div className={styles.cover}>
           <Image
-            src={project.cover}
+            src={asset(project.cover)}
             alt={`${project.title} cover image`}
             fill
             sizes="(min-width: 48rem) 42rem, 100vw"
@@ -119,7 +127,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           {project.screenshots.map((src, index) => (
             <li key={src}>
               <Image
-                src={src}
+                src={asset(src)}
                 alt={`${project.title} screenshot ${index + 1}`}
                 width={540}
                 height={960}

@@ -16,9 +16,11 @@ export function Footer() {
               </a>
             </li>
           ))}
-          <li>
-            <a href={`mailto:${site.email}`}>Email</a>
-          </li>
+          {site.email && (
+            <li>
+              <a href={`mailto:${site.email}`}>Email</a>
+            </li>
+          )}
         </ul>
       </div>
     </footer>

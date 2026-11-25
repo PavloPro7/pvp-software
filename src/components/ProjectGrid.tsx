@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PlatformList } from "@/components/PlatformList";
+import { asset } from "@/lib/paths";
 import type { ProjectMeta } from "@/lib/projects";
 import styles from "./ProjectGrid.module.scss";
 
@@ -18,7 +19,7 @@ export function ProjectGrid({ projects }: { projects: ProjectMeta[] }) {
             <div className={styles.head}>
               {project.icon && (
                 <Image
-                  src={project.icon}
+                  src={asset(project.icon)}
                   alt=""
                   width={48}
                   height={48}
